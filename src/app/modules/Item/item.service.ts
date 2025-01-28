@@ -1,5 +1,6 @@
 import { QueryBuilder } from '../../builder/QueryBuilder';
 import { TImageFiles } from '../../interfaces/image.interface';
+import { addDocumentToIndex } from '../../utils/meilisearch';
 // import {
 //   addDocumentToIndex,
 //   deleteDocumentFromIndex,
@@ -18,7 +19,7 @@ const createItemIntoDB = async (payload: TItem, images: TImageFiles) => {
 
   const result = await Item.create(payload);
 
-  // await addDocumentToIndex(result, 'items');
+  await addDocumentToIndex(result, 'items');
   return result;
 };
 

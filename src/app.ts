@@ -7,6 +7,7 @@ import globalErrorHandler from './app/middlewares/globalErrorHandler';
 import routes from './app/routes';
 import cookieParser from 'cookie-parser';
 import notFound from './app/middlewares/notFound';
+import meiliClient from './app/utils/meilisearch';
 
 const app: Application = express();
 
@@ -19,11 +20,15 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use('/api/v1', routes);
 
+//! This is only for development
+//! Do not uncomment this in production
+// meiliClient.index('items').deleteAllDocuments();
+
 //Testing
 app.get('/', (req: Request, res: Response, next: NextFunction) => {
   res.status(httpStatus.OK).json({
     success: true,
-    message: 'Welcome to the Lost And Found API',
+    message: 'Welcome to the Lost And Found Hub API',
   });
 });
 
